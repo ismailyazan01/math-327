@@ -1,0 +1,338 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsthm}
+
+% Section headings formatted as "1. Problem 4.12"
+\makeatletter
+\renewcommand{\@seccntformat}[1]{\csname the#1\endcsname.\enspace}
+\makeatother
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem*{problem}{Problem}
+
+\title{MATH 327 Homework 2 Fall 2026}
+\author{Yazan Ismail}
+\date{10/18/2026}
+
+\begin{document}
+\maketitle
+
+%======================================================================
+\section{Problem 4.12}
+
+\begin{problem}
+Let $\mathbb{I} = \mathbb{R} \setminus \mathbb{Q}$ denote the set of irrational numbers. Prove that if $a, b \in \mathbb{R}$ with $a < b$, then there exists $x \in \mathbb{I}$ such that $a < x < b$. (Hint: first show that $r + \sqrt{2}$ is irrational for every $r \in \mathbb{Q}$.)
+\end{problem}
+
+\begin{lemma}\label{lem:r-sqrt2}
+Let $r \in \mathbb{Q}$. Then $r + \sqrt{2} \notin \mathbb{Q}$.
+\end{lemma}
+
+\begin{proof}
+Suppose for the sake of contradiction that $r + \sqrt{2} \in \mathbb{Q}$. Thus, $r + \sqrt{2} = \frac{p}{q}$ for some $p \in \mathbb{Z}$, $q \in \mathbb{N}$, and $r = \frac{w}{v}$ for $w \in \mathbb{Z}$ and $v \in \mathbb{N}$. Hence, we have:
+\begin{align*}
+\frac{w}{v} + \sqrt{2} &= \frac{p}{q}, \\
+\sqrt{2} &= \frac{p}{q} - \frac{w}{v}, \\
+\sqrt{2} &= \frac{pv - wq}{qv},
+\end{align*}
+where $(pv - wq), (qv) \in \mathbb{Z}$ under the additive and multiplicative closure of $\mathbb{Z}$.
+
+Hence, a contradiction, and thus $r + \sqrt{2} \notin \mathbb{Q}$.
+\end{proof}
+
+\begin{theorem}
+If $a, b \in \mathbb{R}$ s.t.\ $a < b$, then there exists $x \in \mathbb{R} \setminus \mathbb{Q}$ s.t.\ $a < x < b$.
+\end{theorem}
+
+\begin{proof}
+Let $a, b \in \mathbb{R}$ s.t.\ $a < b$. Thus, we have:
+\begin{align*}
+a &< b, \\
+0 &< b - a, \tag{1} \\
+0 &< \frac{b-a}{2}, \\
+a &< \frac{b-a}{2} + a
+\end{align*}
+and we have
+\begin{align*}
+a &< b, \\
+a + b &< 2b, \\
+b - a &< 2b - 2a, \\
+\frac{b-a}{2} &< b - a, \\
+\frac{b-a}{2} + a &< b.
+\end{align*}
+Thus, we have
+\begin{equation*}
+a < \frac{b-a}{2} + a < b \tag{2}
+\end{equation*}
+via transitivity.
+
+Since $\frac{b-a}{2} > 0$ by inequality (1), and since $\sqrt{2} > 0$, then by the Archimedean Property, $\exists\, n \in \mathbb{N}$ s.t.\ $n\left(\frac{b-a}{2}\right) > \sqrt{2}$,
+\begin{equation*}
+\frac{b-a}{2} > \frac{\sqrt{2}}{n}. \tag{3}
+\end{equation*}
+Let $n \in \mathbb{N}$ be such $n$.
+
+Since $\sqrt{2}, n > 0$, then $\frac{\sqrt{2}}{n} > 0$ and hence:
+\begin{equation*}
+\frac{\sqrt{2}}{n} + a > a \tag{4}
+\end{equation*}
+Via transitivity of inequalities (2), (3), and (4) we have:
+\begin{align*}
+\frac{b-a}{2} + a &> \frac{\sqrt{2}}{n} + a > a, \\
+b &> \frac{\sqrt{2}}{n} + a > a,
+\end{align*}
+and by Lemma~\ref{lem:r-sqrt2}, $\frac{\sqrt{2}}{n} + a \notin \mathbb{Q}$.
+
+Hence, $\frac{\sqrt{2}}{n} + a \in \mathbb{I}$ s.t.\ $a < \frac{\sqrt{2}}{n} + a < b$.
+\end{proof}
+
+%======================================================================
+\clearpage
+\section{Problem 4.14(b)}
+
+\begin{problem}
+Let $A, B \subseteq \mathbb{R}$ s.t.\ $A$ and $B$ are nonempty and bounded. Let $A + B$ be the set of all sums $a + b$ where $a \in A$ and $b \in B$. Prove $\inf(A+B) = \inf(A) + \inf(B)$.
+\end{problem}
+
+\begin{proof}
+Suppose that $\inf(A) + \inf(B) \neq \inf(A+B)$. Thus, $\inf(A) + \inf(B)$ is not a lower bound for $A+B$, or $\exists$ a lower bound for $A+B$ less than $\inf(A) + \inf(B)$.
+
+\medskip
+\underline{Case 1.} Suppose for the sake of contradiction that $\inf(A) + \inf(B)$ is not a lower bound for $A+B$. Thus, $\exists\, a + b \in A + B$ s.t.\ $a + b < \inf(A) + \inf(B)$. Since $a \geq \inf(A)$ $\forall a \in A$, then $0 \geq \inf(A) - a$. Hence,
+\[
+b < (\inf(A) - a) + \inf(B) \leq \inf(B),
+\]
+where $b < \inf(B)$ contradicts the def.\ of an infimum, and thus, $\inf(A) + \inf(B)$ is a lower bound for $A+B$.
+
+\medskip
+\underline{Case 2.} Suppose for the sake of contradiction that $\inf(A) + \inf(B)$ is not the greatest lower bound for $A+B$. Thus, $\forall\, a + b \in A + B$,
+\[
+a + b \geq \inf(A+B) > \inf(A) + \inf(B).
+\]
+Since $\inf(A+B) > \inf(A) + \inf(B)$, then there exists $x \in \mathbb{R}$ s.t.
+\[
+\inf(A) + \inf(B) < x < \inf(A+B) \leq a + b.
+\]
+Thus, we have:
+\begin{align*}
+\inf(A) + \inf(B) &< x < a + b, \\
+\inf(A) + (\inf(B) - b) &< x - b < a,
+\end{align*}
+where $\inf(B) \leq b$, or $\inf(B) - b \leq 0$.
+
+Suppose $\inf(B) = b$, or $\inf(B) - b = 0$. Thus, we have:
+\[
+\inf(A) + (\inf(B) - b) = \inf(A) < x - b < a,
+\]
+where $x - b$ is a greater lower bound for $A$ than $\inf(A)$, which is a contradiction.
+
+Hence, we're left with $\inf(B) < b$. Thus, we have:
+\[
+\inf(B) < \frac{b - \inf(B)}{2} + \inf(B) < b,
+\]
+where $\frac{b - \inf(B)}{2} + \inf(B)$ is a greater lower bound for $B$ than $\inf(B)$, and we've thus exhausted all options with contradictions.
+
+Hence, $\inf(A+B) = \inf(A) + \inf(B)$.
+\end{proof}
+
+%======================================================================
+\clearpage
+\section{Problem 8.2(c)}
+
+\begin{problem}
+Determine the limit of $c_n = \frac{4n+3}{7n-5}$ and prove that claim.
+\end{problem}
+
+\begin{theorem}
+$\lim\left[\frac{4n+3}{7n-5}\right] = \frac{4}{7}$.
+\end{theorem}
+
+\begin{proof}
+Let $c_n = \frac{4n+3}{7n-5}$. Let $\varepsilon > 0$. Let $N \in \mathbb{N}$ s.t.\ $\frac{1 + 35\varepsilon}{49\varepsilon} < N$.
+
+Thus, we have:
+\begin{align*}
+\frac{1 + 35\varepsilon}{49\varepsilon} &< N, \\
+\frac{1 + 35\varepsilon}{\varepsilon} &< 49N, \\
+\frac{1}{\varepsilon} + 35 &< 49N, \\
+\frac{1}{\varepsilon} &< 49N - 35, \\
+\frac{1}{49N - 35} &< \varepsilon,
+\end{align*}
+and since $N \in \mathbb{N}$, then $49N - 35 \geq 0$. Hence, $\left|\frac{1}{49N - 35}\right| = \frac{1}{49N - 35}$.
+
+Thus, we have:
+\begin{align*}
+\left|\frac{1}{49N - 35}\right| &< \varepsilon, \\
+\left|\frac{(21 - 20) + (28N - 28N)}{49N - 35}\right| &< \varepsilon, \\
+\left|\frac{(28N + 21) - 4(7N + 5)}{49N - 35}\right| &< \varepsilon, \\
+\left|\frac{7(4N + 3) - 4(7N - 5)}{7(7N - 5)}\right| &< \varepsilon, \\
+\left|\frac{4N + 3}{7N - 5} - \frac{4}{7}\right| &< \varepsilon.
+\end{align*}
+Thus, for an arbitrary $\varepsilon > 0$, there exists $N \in \mathbb{N}$ s.t.\ $n \geq N$ implies:
+\[
+\left|\frac{4N + 3}{7N - 5} - \frac{4}{7}\right| < \varepsilon.
+\]
+Hence, $\lim\left[\frac{4n+3}{7n-5}\right] = \frac{4}{7}$.
+\end{proof}
+
+%======================================================================
+\clearpage
+\section{Problem 8.4}
+
+\begin{problem}
+Let $(t_n)$ be a bounded sequence, i.e., there exists $M$ s.t.\ $|t_n| \leq M$ for all $n$, and let $(s_n)$ be a sequence s.t.\ $\lim s_n = 0$. Prove that $\lim(s_n t_n) = 0$.
+\end{problem}
+
+\begin{proof}
+Let $s_n$ be a sequence s.t.\ $\lim[s_n] = 0$. Let $(t_n)$ be a bounded sequence s.t.\ $|t_n| \leq M$ for all $n \in \mathbb{N}$. Suppose for the sake of contradiction that $s_n t_n$ diverges.
+
+Thus, there exists $\varepsilon > 0$ s.t.\ $\forall N \in \mathbb{N}$, $n \geq N$ and $|s_n t_n| \geq \varepsilon$.
+
+Let $\varepsilon_2 > 0$ be such that
+\begin{align*}
+|s_n| M &\geq \varepsilon_2, \\
+|s_n| &\geq \frac{\varepsilon_2}{M}.
+\end{align*}
+Let $\varepsilon_1 = \frac{\varepsilon_2}{M}$. Since $\varepsilon_2 > 0$ and $0 \leq |t_n| \leq M$, then $\frac{\varepsilon_2}{M} \geq 0$.
+
+Thus, converging to $0$ implies that $\forall \varepsilon > 0$, $\exists N \in \mathbb{N}$ s.t.\ $n \geq N$ implies $|s_n| < \varepsilon$.
+
+However, $\varepsilon_2$ is an $\varepsilon > 0$ s.t.\ $|s_n| \geq \varepsilon$. Hence, a contradiction.
+\end{proof}
+
+%======================================================================
+\clearpage
+\section{Problem 8.8(a)}
+
+\begin{problem}
+Prove $\lim\left[\sqrt{n^2 + 1} - n\right] = 0$.
+\end{problem}
+
+\begin{proof}
+Let $\varepsilon > 0$. By the Archimedean Property, there exists $n \in \mathbb{N}$ s.t.
+\[
+\frac{1 - \varepsilon^2}{2\varepsilon} < n.
+\]
+Let $N$ be such $n$. Thus, we have:
+\begin{align*}
+\frac{1 - \varepsilon^2}{2\varepsilon} &< N, \\
+\frac{1 - \varepsilon^2}{\varepsilon} &< 2N, \\
+\frac{1}{\varepsilon} - \varepsilon &< 2N, \\
+\frac{1}{\varepsilon} &< 2N + \varepsilon, \\
+1 &< 2N\varepsilon + \varepsilon^2, \\
+N^2 + 1 &< N^2 + 2N\varepsilon + \varepsilon^2, \\
+\sqrt{N^2 + 1} &< \varepsilon + N,
+\end{align*}
+since $\varepsilon, N > 0$ so $\sqrt{N^2 + 1} > 0$ and hence $\sqrt{N^2 + 1} < -\varepsilon - N$ is a contradiction.
+
+Thus, we have:
+\begin{align*}
+\sqrt{N^2 + 1} &< \varepsilon + N, \\
+\sqrt{N^2 + 1} - N &< \varepsilon, \\
+\sqrt{N^2\left(1 + \frac{1}{N^2}\right)} - N &< \varepsilon, \\
+N\sqrt{1 + \frac{1}{N^2}} - N &< \varepsilon,
+\end{align*}
+where $\sqrt{1 + \frac{1}{N^2}} > 1$ $\forall N \in \mathbb{N}$. Hence, $N\sqrt{1 + \frac{1}{N^2}} > N$ and thus $\sqrt{N^2 + 1} - N > 0$.
+
+Therefore,
+\[
+\sqrt{N^2 + 1} - N = \left|\sqrt{N^2 + 1} - N\right| < \varepsilon,
+\]
+where $\forall \varepsilon > 0$, we've shown there exists $N \in \mathbb{N}$ s.t.\ $n \geq N$ implies
+\[
+\left|\sqrt{N^2 + 1} - N\right| < \varepsilon, \quad \text{or} \quad \left|\left(\sqrt{N^2 + 1} - N\right) - 0\right| < \varepsilon.
+\]
+
+Hence, $\lim\left[\sqrt{n^2 + 1} - n\right] = 0$.
+\end{proof}
+
+%======================================================================
+\clearpage
+\section{Problem 6}
+
+\begin{problem}
+Prove that if $(s_n)$ converges, then so does $(|s_n|)$. Show by an example that the converse of this statement does not hold.
+\end{problem}
+
+\begin{proof}
+Suppose $a_n$ converges to $a$. Let $\varepsilon_1$ be such an $\varepsilon$ s.t.\ $\frac{\varepsilon_1}{2} > 0$. Hence, there exists $N \in \mathbb{N}$ s.t.\ $n \geq N$ implies:
+\begin{align*}
+|a_n - a| &< \frac{\varepsilon_1}{2}, \\
+2|a_n - a| &< \varepsilon_1, \\
+|a_n - a| + |a_n - a| &< \varepsilon_1, \\
+|a_n - a| &< \varepsilon_1 - |a_n - a|, \\
+|a_n - a| &< \varepsilon_1 - \bigl|(a_n - |a_n|) + (|a_n| - a)\bigr| \\
+&\leq \varepsilon_1 - \bigl|a_n - |a_n|\bigr| - \bigl||a_n| - a\bigr|, \tag{1}
+\end{align*}
+where inequality (1) holds via the triangle inequality. Thus, via transitivity, we have:
+\begin{align*}
+|a_n - a| &< \varepsilon_1 - \bigl|a_n - |a_n|\bigr| - \bigl||a_n| - a\bigr|, \\
+|a_n - a| + \bigl|a_n - |a_n|\bigr| + \bigl||a_n| - a\bigr| &< \varepsilon_1.
+\end{align*}
+Since $|a_n - a|, \bigl|a_n - |a_n|\bigr| \geq 0$, then
+\[
+\bigl||a_n| - a\bigr| \leq |a_n - a| + \bigl|a_n - |a_n|\bigr| + \bigl||a_n| - a\bigr| < \varepsilon_1,
+\]
+and via transitivity, we have:
+\[
+\bigl||a_n| - a\bigr| < \varepsilon_1.
+\]
+Thus, for all $\varepsilon_1 > 0$, there exists $N \in \mathbb{N}$ s.t.\ $n \geq N$ implies $\bigl||a_n| - a\bigr| < \varepsilon_1$. Hence, $|a_n|$ converges and thus, $a_n$ converging implies $|a_n|$ converges.
+\end{proof}
+
+% TODO: Add an example showing the converse does not hold.
+
+%======================================================================
+\clearpage
+\section{Problem 8.7(b)}
+
+\begin{problem}
+Prove $S_n = (-1)^n n$ diverges.
+\end{problem}
+
+\begin{proof}
+Let $n \in \mathbb{N}$ and let $S_n = (-1)^n n$.
+
+\medskip
+\underline{Case 1.} Suppose $n = 2k$ for some $k \in \mathbb{Z}$. Thus,
+\[
+(-1)^{2k} \cdot n = \left[(-1)^k\right]^2 \cdot n,
+\]
+where $\forall x \in \mathbb{R}$, $x^2 \geq 0$. Thus since $n \geq 1$, then $\left[(-1)^k\right]^2 \cdot n \geq 0$, and hence, $(-1)^n = 1$ and $(-1)^n \cdot n = n$. Hence, $|(-1)^n \cdot n| = 1 \cdot n = n$.
+
+\medskip
+\underline{Case 2.} Suppose $n = 2j + 1$ for some $j \in \mathbb{Z}$. Thus,
+\[
+(-1)^n \cdot n = (-1)^{2j+1} \cdot n = (-1)^{2j} \cdot (-1) \cdot n,
+\]
+where $(-1)^{2j} \cdot n$ for $j \in \mathbb{Z}$ is equal to $n$. Thus,
+\[
+(-1)^n \cdot n = (-1)^{2j} \cdot (-1) \cdot n = (-1) \cdot n = -n.
+\]
+Hence, $|(-1)^n \cdot n| = |-n| = n$ since $n \geq 1$.
+
+\medskip
+Thus, $|S_n| = |(-1)^n n| = n$.
+
+Since $|S_n| = n$ is a trivially divergent sequence, then by Problem 6 of this homework (HW 2), the contrapositive says:
+\begin{center}
+``If $|a_n|$ diverges, then $a_n$ diverges.''
+\end{center}
+Hence, since $|S_n| = n$ diverges, then $S_n = (-1)^n n$ diverges.
+\end{proof}
+
+%======================================================================
+\clearpage
+\section{Problem 8.9(a)}
+
+\begin{problem}
+Let $(s_n)$ be a convergent sequence. Show that if $s_n \geq a$ for all but finitely many $n$, then $\lim s_n \geq a$. (Per the assignment, you may assume the inequality holds for all $n$.)
+\end{problem}
+
+% TODO: Add your proof of 8.9(a) here.
+% \begin{proof}
+%
+% \end{proof}
+
+\end{document}
